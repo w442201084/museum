@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js"></script>
+
+</head>
+<body>
+
+<a href="javascript:void(0)" onclick="uploadPhoto()">选择图片</a>
+<input type="file" id="photoFile" style="display: none;" onchange="upload()">
+<img id="preview_photo" src="" width="200px" height="200px">
+</body>
+
+
+<script>
+    function uploadPhoto() {
+        $("#photoFile").click();
+    }
+
+    /**
+     * 上传图片
+     */
+    function upload() {
+        if ($("#photoFile").val() == '') {
+            return;
+        }
+        var formData = new FormData();
+        formData.append('file', document.getElementById('photoFile').files[0]);
+        $.ajax({
+            url:"/users/parse",
+            type:"post",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(data) {
+                console.log(data);
+            },
+            error:function(data) {
+                alert("上传失败")
+            }
+        });
+    }
+</script>
+</html>
