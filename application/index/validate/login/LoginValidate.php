@@ -30,7 +30,6 @@ class LoginValidate extends BaseValidate
     ];
 
     public function checkCap($value) {
-        return true;
         $captcha = new Captcha();
         return $captcha -> check($value);
     }
